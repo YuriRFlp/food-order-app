@@ -1,0 +1,56 @@
+.flexRowContainer{
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    border-bottom: 1px solid rgba(204, 204, 204, .6);
+    margin: .5rem 0;
+    padding: 1rem 0;
+}
+
+.flexColumnContainer{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    text-align: left;
+}
+
+.title{
+    margin: 0;
+}
+
+.text{
+    margin: .25rem 0;
+    font-size: .9rem;
+}
+
+.price{
+    font-weight: 700;
+    color:rgb(175, 50, 0);
+    margin: .25rem 0;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.label{
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.input{
+    border: 1px solid rgba(204, 204, 204, .6);
+    border-radius: 5px;
+    width: 30%;
+    padding: .3rem;
+    margin-left: 1rem;
+    text-align: center;
+}
+
+.input:focus{
+    outline: none;
+    box-shadow: 0 0 0 1px #ccc;
+}

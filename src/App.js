@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+// import styles from './App.module.css';
+import { Fragment } from 'react';
+import Description from './components/Description/Description';
+import FoodList from './components/FoodList/FoodList';
+import Header from './components/Header/Header';
 
-function App() {
+const App = () => {
+  let foodList = [
+    {
+      title: "Sushi",
+      description: "Finest fish and veggies",
+      price: 22.99
+    },
+    {
+      title: "Schnitzel",
+      description: "A german, specialty",
+      price: 16.50
+    },
+    {
+      title: "Barbecue Burger",
+      description: "American, raw, meaty",
+      price: 12.99
+    },
+    {
+      title: "Green Bowl",
+      description: "Healthy and green",
+      price: 18.99
+    }
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Header/>
+      <Description/>
+      <FoodList items={foodList}></FoodList>
+    </Fragment>
   );
 }
 
