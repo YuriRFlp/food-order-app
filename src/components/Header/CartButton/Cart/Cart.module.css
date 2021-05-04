@@ -1,0 +1,17 @@
+.amount-container{
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid rgb(97, 1, 1);
+    color: #000;
+}
+
+.button-container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.total-amount{
+    font-weight: 600;
+    color: #000;
+    margin-right: 1rem;
+}

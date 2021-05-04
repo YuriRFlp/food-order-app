@@ -2,6 +2,10 @@ import Container from '../UI/Container/Container';
 import FoodItem from './FoodItem/FoodItem';
 
 const FoodList = (props) => {
+    const liftingDataFromFoodListHandler = (foodData) => {
+        props.onLift(foodData);
+    };
+
     return(
         <Container>
             {props.items.map( food => {
@@ -11,6 +15,7 @@ const FoodList = (props) => {
                         product={food.title}
                         detail={food.description}
                         price={food.price.toFixed(2)}
+                        onLift={liftingDataFromFoodListHandler}
                     />
                 )
             })}

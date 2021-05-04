@@ -1,5 +1,5 @@
 import styles from './FoodItem.module.css';
-import Button from '../../UI/Button/Button';
+import ButtonRed from '../../UI/Button/ButtonRed';
 import { useState } from 'react';
 
 const FoodItem = (props) => {
@@ -9,6 +9,20 @@ const FoodItem = (props) => {
         setAmount(event.target.value);
     };
 
+    const submitHandler = (event) => {
+        event.preventDefault();
+
+        const foodData = {
+            title: props.product,
+            price: props.price,
+            amount: amount
+        };
+
+        props.onLift(foodData);
+
+        setAmount(0);
+    }
+
     return(
         <div className={styles.flexRowContainer}>
             <div className={styles.flexColumnContainer}>
@@ -17,7 +31,7 @@ const FoodItem = (props) => {
                 <span className={styles.price}>${props.price}</span>
             </div>
 
-            <form className={styles.flexColumnContainer}>
+            <form className={styles.flexColumnContainer} onSubmit={submitHandler}>
                 <div className={styles.form}>
                     <label className={styles.label} htmlFor="amount">Amount</label>
                     <input 
@@ -29,7 +43,7 @@ const FoodItem = (props) => {
                         onChange={amountChangeHandler}
                     />
                 </div>
-                <Button>+ Add</Button>
+                <ButtonRed>+ Add</ButtonRed>
             </form>
         </div>
     );

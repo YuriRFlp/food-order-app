@@ -1,11 +1,11 @@
-// import styles from './App.module.css';
-import { Fragment } from 'react';
+import { useState } from 'react';
 import Description from './components/Description/Description';
 import FoodList from './components/FoodList/FoodList';
 import Header from './components/Header/Header';
+import FoodListContext from './store/foodList-context';
 
 const App = () => {
-  let foodList = [
+  const foodList = [
     {
       title: "Sushi",
       description: "Finest fish and veggies",
@@ -28,12 +28,20 @@ const App = () => {
     }
   ];
 
+  const [selectedFood, setSelectedFood] = useState([]);
+
+  const setFoodListContext = foodData => {
+    setSelectedFood( prevSelectedFood => {
+      return [foodData, ...prevSelectedFood];
+    });
+  };
+
   return (
-    <Fragment>
+    <FoodListContext.Provider value={selectedFood}>
       <Header/>
       <Description/>
-      <FoodList items={foodList}></FoodList>
-    </Fragment>
+      <FoodList items={foodList} onLift={setFoodListContext}></FoodList>
+    </FoodListContext.Provider>
   );
 }
 

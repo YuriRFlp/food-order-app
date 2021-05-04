@@ -1,0 +1,44 @@
+.flexRowContainer{
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    padding-top: .5rem;
+    border-top: 1px solid rgba(97, 1, 1, .5);
+    text-align: left;
+}
+
+.gridContainer{
+    display: grid;
+    grid-template-columns: 5rem;
+}
+
+.title{
+    grid-area: 1/1/2/3;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.text{
+    grid-row: 2/3;
+    font-size: .9rem;
+    font-weight: 600;
+    align-self: baseline;
+}
+
+.text:nth-child(2){
+    color: rgb(97, 1, 1);
+}
+
+.text:nth-child(3){
+    margin-left: 4rem;
+    border: 1px solid #ccc;
+    padding: .1rem;
+    border-radius: 5px;
+    letter-spacing: .25rem;
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+}

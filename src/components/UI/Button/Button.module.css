@@ -1,18 +1,34 @@
-.button{
+.buttonRed{
     border: none;
     background-color: rgb(97, 1, 1);
     border-radius: 15px;
     color: #fff;
     cursor: pointer;
-    padding: .5rem .25rem;
+    padding: .5rem 1rem;
     margin: 0 1rem;
+    font-weight: 600;
 }
 
-.button:focus{
+.buttonWhite{
+    border: 1px solid rgb(97, 1, 1);
+    background-color: #fff;
+    border-radius: 15px;
+    color: rgb(97, 1, 1);
+    cursor: pointer;
+    padding: .5rem 1rem;
+    margin: 0 1rem;
+    font-weight: 600;
+}
+
+.buttonRed:focus, .buttonWhite:focus{
     outline: none;
     box-shadow: 0 0 0 1px rgb(97, 1, 1);
 }
 
-.button:hover{
+.buttonRed:hover{
     background-color: rgba(97, 1, 1, .9);
 }
+
+.buttonWhite:hover{
+    background-color: rgba(97, 1, 1, .1);
+} 
