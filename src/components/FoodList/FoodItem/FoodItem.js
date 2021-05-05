@@ -12,16 +12,20 @@ const FoodItem = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
 
+        if(amount === 0){
+            return;
+        }
+
         const foodData = {
             title: props.product,
             price: props.price,
-            amount: amount
+            amount: Number(amount)
         };
 
         props.onLift(foodData);
 
         setAmount(0);
-    }
+    };
 
     return(
         <div className={styles.flexRowContainer}>

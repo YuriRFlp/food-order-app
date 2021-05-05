@@ -2,7 +2,7 @@ import Container from '../UI/Container/Container';
 import FoodItem from './FoodItem/FoodItem';
 
 const FoodList = (props) => {
-    const liftingDataFromFoodListHandler = (foodData) => {
+    const liftingDataFromFoodListHandler = foodData => {
         props.onLift(foodData);
     };
 

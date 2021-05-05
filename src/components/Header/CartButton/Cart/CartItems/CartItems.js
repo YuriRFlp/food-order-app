@@ -2,6 +2,16 @@ import ButtonWhite from '../../../../UI/Button/ButtonWhite';
 import styles from './CartItems.module.css';
 
 const CartItems = (props) => {
+    const subtractHandler = (event) => {
+        props.onSubtract(event.target.parentNode.parentNode.firstChild.firstChild.textContent);
+        props.onCalc();
+    };
+
+    const addHandler = (event) => {
+        props.onAdd(event.target.parentNode.parentNode.firstChild.firstChild.textContent);
+        props.onCalc();
+    };
+
     return(
         <div className={styles.flexRowContainer}>
             <div className={styles.gridContainer}>
@@ -10,8 +20,8 @@ const CartItems = (props) => {
                 <p className={styles.text}>x{props.amount}</p>
             </div>
             <div className={styles.btnContainer}>
-                <ButtonWhite>-</ButtonWhite>
-                <ButtonWhite>+</ButtonWhite>
+                <ButtonWhite onClick={!(props.amount === 0) ? subtractHandler : undefined}>-</ButtonWhite>
+                <ButtonWhite onClick={addHandler}>+</ButtonWhite>
             </div>
         </div>
     );

@@ -14,9 +14,23 @@ const CartButton = (props) => {
         }
     }
 
+    const liftingSubtractHandler = foodTitle => {
+        props.onSubtract(foodTitle);
+    };
+
+    const liftingAddHandler = foodTitle => {
+        props.onAdd(foodTitle);
+    };
+
     return(
         <Fragment>
-            {cartAvailable && <Cart onClick={cartVisibleHandler}/>}
+            {cartAvailable && 
+                <Cart 
+                    onClick={cartVisibleHandler} 
+                    onSubtract={liftingSubtractHandler}
+                    onAdd={liftingAddHandler}
+                />
+            }
             {cartAvailable && <Backdrop/>}
             <button type="button" className={styles.cartButton} onClick={cartVisibleHandler}>
                 <i className={`fas fa-shopping-cart ${styles['cart-icon']}`}></i>

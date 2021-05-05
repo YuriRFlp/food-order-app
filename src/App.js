@@ -32,15 +32,54 @@ const App = () => {
 
   const setFoodListContext = foodData => {
     setSelectedFood( prevSelectedFood => {
-      return [foodData, ...prevSelectedFood];
+      let isARepeatItem = false;
+      
+      prevSelectedFood.forEach( food => {
+        if(food.title === foodData.title){
+          food.amount += foodData.amount;
+          isARepeatItem = true;
+        };
+      });
+      
+      return (isARepeatItem) ? prevSelectedFood : [foodData, ...prevSelectedFood];
+    });
+  };
+
+  const subAmountHandler = foodTitle => {
+    setSelectedFood( prevSelectedFood => {
+      prevSelectedFood.forEach( food => {
+        if(food.title === foodTitle){
+          food.amount -= 1;
+        };
+      });
+      
+      return prevSelectedFood;
+    });
+  };
+
+  const addAmountHandler = foodTitle => {
+    setSelectedFood( prevSelectedFood => {
+      prevSelectedFood.forEach( food => {
+        if(food.title === foodTitle){
+          food.amount += 1;
+        };
+      });
+      
+      return prevSelectedFood;
     });
   };
 
   return (
     <FoodListContext.Provider value={selectedFood}>
-      <Header/>
+      <Header 
+        onSubtract={subAmountHandler}  
+        onAdd={addAmountHandler}
+      />
       <Description/>
-      <FoodList items={foodList} onLift={setFoodListContext}></FoodList>
+      <FoodList 
+        items={foodList} 
+        onLift={setFoodListContext}
+      />
     </FoodListContext.Provider>
   );
 }
