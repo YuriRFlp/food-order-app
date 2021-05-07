@@ -1,13 +1,33 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useContext } from 'react';
+import FoodListContext from '../../../store/foodList-context';
 import styles from './CartButton.module.css';
 import Cart from '../CartButton/Cart/Cart';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 
 const CartButton = (props) => {
+    const ctx = useContext(FoodListContext);
     const [cartAvailable, setCartAvailable] = useState(false);
+    const [totalPrice, setTotalPrice] = useState(Number(0).toFixed(2));
+
+    const calcPrice = () => {
+        if(ctx.length > 0){
+            setTotalPrice( () => {
+                let prices = ctx.map( food => {
+                    return (food.price * food.amount);
+                });
+
+                let total = prices.reduce( (p1, p2) => {
+                    return p1 + p2;
+                });
+                
+                return total.toFixed(2);
+            });
+        };
+    };
 
     const cartVisibleHandler = () => {
         if(!cartAvailable){
+            calcPrice();
             setCartAvailable(true);
         } else{
             setCartAvailable(false);
@@ -29,12 +49,14 @@ const CartButton = (props) => {
                     onClick={cartVisibleHandler} 
                     onSubtract={liftingSubtractHandler}
                     onAdd={liftingAddHandler}
+                    onCalc={calcPrice}
+                    totalPrice={totalPrice}
                 />
             }
             {cartAvailable && <Backdrop/>}
             <button type="button" className={styles.cartButton} onClick={cartVisibleHandler}>
                 <i className={`fas fa-shopping-cart ${styles['cart-icon']}`}></i>
-                <span className={styles.span}>{props.children}</span>
+                <span className={styles.span}>{ctx.length}</span>
             </button>
         </Fragment>
     );

@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import FoodListContext from '../../../../store/foodList-context';
 import CartItems from './CartItems/CartItems';
 import Container from '../../../UI/Container/Container';
@@ -10,22 +10,6 @@ import Backdrop from '../../../UI/Backdrop/Backdrop';
 
 const Cart = (props) => {
     const ctx = useContext(FoodListContext);
-
-    const [totalPrice, setTotalPrice] = useState(Number(0).toFixed(2));
-
-    const calcPrice = () => {
-        setTotalPrice( prevTotalPrice => {
-            let prices = ctx.map( food => {
-                return (food.price * food.amount);
-            });
-
-            let total = prices.reduce( (p1, p2) => {
-                return p1 + p2;
-            });
-            
-            return total.toFixed(2);
-        });
-    }
 
     const liftingSubtractHandler = foodTitle => {
         props.onSubtract(foodTitle);
@@ -47,13 +31,13 @@ const Cart = (props) => {
                             amount={food.amount}
                             onSubtract={liftingSubtractHandler}
                             onAdd={liftingAddHandler}
-                            onCalc={calcPrice}
+                            onCalc={props.onCalc}
                         />
                     );
                 })};
                 <div className={styles['amount-container']}>
                     <h3>Total Price</h3>
-                    <p className={styles['total-amount']}>${totalPrice}</p>
+                    <p className={styles['total-amount']}>${props.totalPrice}</p>
                 </div>
                 <div className={styles['button-container']}>
                     <ButtonWhite onClick={props.onClick}>Close</ButtonWhite>

@@ -5,8 +5,8 @@
     color: #fff;
     cursor: pointer;
     padding: .5rem 1rem;
-    margin: 0 1rem;
     font-weight: 600;
+    width: 100%;
 }
 
 .buttonWhite{
@@ -16,8 +16,9 @@
     color: rgb(97, 1, 1);
     cursor: pointer;
     padding: .5rem 1rem;
-    margin: 0 1rem;
     font-weight: 600;
+    width: 100%;
+    margin: 0 .5rem;
 }
 
 .buttonRed:focus, .buttonWhite:focus{
@@ -31,4 +32,16 @@
 
 .buttonWhite:hover{
     background-color: rgba(97, 1, 1, .1);
-} 
+}
+
+@media (min-width: 510px){
+    .buttonRed{
+        width: auto;
+        margin: 0 1rem;
+    }
+
+    .buttonWhite{
+        width: auto;
+        margin: 0 1rem;
+    }
+}

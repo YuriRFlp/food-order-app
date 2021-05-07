@@ -1,12 +1,7 @@
-import { useContext } from 'react';
-import FoodListContext from '../../store/foodList-context';
 import styles from './Header.module.css';
 import CartButton from './CartButton/CartButton';
 
 const Header = (props) => {
-    const ctx = useContext(FoodListContext);
-    let countFoodItem = ctx.length;
-
     const liftingSubtractHandler = foodTitle => {
         props.onSubtract(foodTitle);
     };
@@ -20,9 +15,7 @@ const Header = (props) => {
             <h1 className={styles.title}>ReactMeals</h1>
             <CartButton
                 onSubtract={liftingSubtractHandler}
-                onAdd={liftingAddHandler}
-            >
-                {countFoodItem}
+                onAdd={liftingAddHandler}>
             </CartButton>
         </header>
     );

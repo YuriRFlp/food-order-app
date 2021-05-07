@@ -1,6 +1,7 @@
 .flexRowContainer{
     display: flex;
-    justify-content: space-between;
+    flex-flow: column;
+    align-items: center;
     color: #000;
     border-bottom: 1px solid rgba(204, 204, 204, .6);
     margin: .5rem 0;
@@ -11,7 +12,6 @@
     display: flex;
     flex-flow: column;
     justify-content: space-around;
-    text-align: left;
 }
 
 .title{
@@ -53,4 +53,15 @@
 .input:focus{
     outline: none;
     box-shadow: 0 0 0 1px #ccc;
+}
+
+@media (min-width: 510px){
+    .flexRowContainer{
+        flex-flow: row;
+        justify-content: space-between;
+    }
+
+    .flexColumnContainer{
+        text-align: left;
+    }
 }

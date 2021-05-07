@@ -20,7 +20,7 @@ const CartItems = (props) => {
                 <p className={styles.text}>x{props.amount}</p>
             </div>
             <div className={styles.btnContainer}>
-                <ButtonWhite onClick={!(props.amount === 0) ? subtractHandler : undefined}>-</ButtonWhite>
+                <ButtonWhite onClick={subtractHandler}>-</ButtonWhite>
                 <ButtonWhite onClick={addHandler}>+</ButtonWhite>
             </div>
         </div>

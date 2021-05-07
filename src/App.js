@@ -47,9 +47,11 @@ const App = () => {
 
   const subAmountHandler = foodTitle => {
     setSelectedFood( prevSelectedFood => {
-      prevSelectedFood.forEach( food => {
-        if(food.title === foodTitle){
+      prevSelectedFood.forEach( (food, i) => {
+        if(food.title === foodTitle && food.amount > 0){
           food.amount -= 1;
+        } else if(food.title === foodTitle && food.amount === 0){
+          prevSelectedFood.splice(i, 1);
         };
       });
       

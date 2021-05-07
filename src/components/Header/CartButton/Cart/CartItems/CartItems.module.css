@@ -1,10 +1,11 @@
 .flexRowContainer{
     display: flex;
-    justify-content: space-between;
+    flex-flow: column;
+    align-items: center;
     color: #000;
     padding-top: .5rem;
     border-top: 1px solid rgba(97, 1, 1, .5);
-    text-align: left;
+    text-align: center;
 }
 
 .gridContainer{
@@ -15,7 +16,6 @@
 .title{
     grid-area: 1/1/2/3;
     margin: 0;
-    font-size: 1.1rem;
 }
 
 .text{
@@ -30,15 +30,36 @@
 }
 
 .text:nth-child(3){
-    margin-left: 4rem;
     border: 1px solid #ccc;
     padding: .1rem;
     border-radius: 5px;
     letter-spacing: .1rem;
+    margin: auto 1.5rem;
 }
 
 .btnContainer{
     display: flex;
     justify-content: space-between;
-    padding: 1.5rem 0;
+    padding: .35rem 0;
+}
+
+@media (min-width: 510px){
+    .flexRowContainer{
+        flex-flow: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    .title{
+        font-size: 1.1rem;
+    }
+
+    .text:nth-child(3){
+        margin: auto;
+        margin-left: 4rem;
+    }
+
+    .btnContainer{
+        padding: 1.5rem 0;
+    }
 }

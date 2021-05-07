@@ -1,11 +1,27 @@
 .header{
     display: flex;
-    justify-content: space-around;
+    flex-flow: column;
+    align-items: center;
     margin: 0;
     padding: .2rem;
     background-color: rgb(97, 1, 1);
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .title{
     text-align: left;
+    margin: .5rem 0 0 0;
+}
+
+@media (min-width: 400px){
+    .header{
+        flex-flow: row;
+        justify-content: space-around;
+    }
+
+    .title{
+        text-align: left;
+    }
 }
