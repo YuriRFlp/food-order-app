@@ -8,7 +8,7 @@
     width: 70vw;
 }
 
-@media (min-width: 510px){
+@media (min-width: 660px){
     .container{
         margin: 3rem auto;
     }

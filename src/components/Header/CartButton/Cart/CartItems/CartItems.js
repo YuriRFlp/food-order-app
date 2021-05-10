@@ -1,4 +1,5 @@
 import ButtonWhite from '../../../../UI/Button/ButtonWhite';
+import ButtonRed from '../../../../UI/Button/ButtonRed';
 import styles from './CartItems.module.css';
 
 const CartItems = (props) => {
@@ -12,6 +13,11 @@ const CartItems = (props) => {
         props.onCalc();
     };
 
+    const deleteHandler = (event) => {
+        props.onDelete(event.target.parentNode.parentNode.firstChild.firstChild.textContent);
+        props.onCalc();
+    }
+
     return(
         <div className={styles.flexRowContainer}>
             <div className={styles.gridContainer}>
@@ -22,6 +28,7 @@ const CartItems = (props) => {
             <div className={styles.btnContainer}>
                 <ButtonWhite onClick={subtractHandler}>-</ButtonWhite>
                 <ButtonWhite onClick={addHandler}>+</ButtonWhite>
+                <ButtonRed onClick={deleteHandler}>Delete</ButtonRed>
             </div>
         </div>
     );

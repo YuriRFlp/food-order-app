@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Description from './components/Description/Description';
 import FoodList from './components/FoodList/FoodList';
 import Header from './components/Header/Header';
-import FoodListContext from './store/foodList-context';
+import FoodListContext from './store/cart-context';
 
 const App = () => {
   const foodList = [
@@ -30,14 +30,14 @@ const App = () => {
 
   const [selectedFood, setSelectedFood] = useState([]);
 
-  const setFoodListContext = foodData => {
+  const setCartContext = foodData => {
     setSelectedFood( prevSelectedFood => {
       let isARepeatItem = false;
       
       prevSelectedFood.forEach( food => {
         if(food.title === foodData.title){
-          food.amount += foodData.amount;
           isARepeatItem = true;
+          food.amount += foodData.amount;
         };
       });
       
@@ -49,12 +49,9 @@ const App = () => {
     setSelectedFood( prevSelectedFood => {
       prevSelectedFood.forEach( (food, i) => {
         if(food.title === foodTitle && food.amount > 0){
-          food.amount -= 1;
-        } else if(food.title === foodTitle && food.amount === 0){
-          prevSelectedFood.splice(i, 1);
-        };
+          food.amount--;
+        }
       });
-      
       return prevSelectedFood;
     });
   };
@@ -63,11 +60,23 @@ const App = () => {
     setSelectedFood( prevSelectedFood => {
       prevSelectedFood.forEach( food => {
         if(food.title === foodTitle){
-          food.amount += 1;
+          food.amount++;
         };
       });
       
       return prevSelectedFood;
+    });
+  };
+
+  const deleteCartItemHandler = foodTitle => {
+    setSelectedFood( prevSelectedFood => {
+      prevSelectedFood.forEach( (food, i) => {
+        if(food.title === foodTitle){
+          prevSelectedFood.splice(i, 1);
+        };
+      });
+
+      return [...prevSelectedFood];
     });
   };
 
@@ -76,11 +85,12 @@ const App = () => {
       <Header 
         onSubtract={subAmountHandler}  
         onAdd={addAmountHandler}
+        onDelete={deleteCartItemHandler}
       />
       <Description/>
       <FoodList 
         items={foodList} 
-        onLift={setFoodListContext}
+        onLift={setCartContext}
       />
     </FoodListContext.Provider>
   );

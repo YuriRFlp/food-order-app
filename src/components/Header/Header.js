@@ -10,12 +10,17 @@ const Header = (props) => {
         props.onAdd(foodTitle);
     };
 
+    const liftingDeleteHandler = foodTitle => {
+        props.onDelete(foodTitle);
+    }
+
     return(
         <header className={styles.header}>
             <h1 className={styles.title}>ReactMeals</h1>
             <CartButton
                 onSubtract={liftingSubtractHandler}
-                onAdd={liftingAddHandler}>
+                onAdd={liftingAddHandler}
+                onDelete={liftingDeleteHandler}>
             </CartButton>
         </header>
     );

@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import { useContext } from 'react';
-import FoodListContext from '../../../../store/foodList-context';
+import CartContext from '../../../../store/cart-context';
 import CartItems from './CartItems/CartItems';
 import Container from '../../../UI/Container/Container';
 import ButtonWhite from '../../../UI/Button/ButtonWhite';
@@ -9,7 +9,7 @@ import styles from './Cart.module.css';
 import Backdrop from '../../../UI/Backdrop/Backdrop';
 
 const Cart = (props) => {
-    const ctx = useContext(FoodListContext);
+    const ctx = useContext(CartContext);
 
     const liftingSubtractHandler = foodTitle => {
         props.onSubtract(foodTitle);
@@ -18,6 +18,10 @@ const Cart = (props) => {
     const liftingAddHandler = foodTitle => {
         props.onAdd(foodTitle);
     };
+
+    const liftingDeleteHandler = foodTitle => {
+        props.onDelete(foodTitle);
+    }
 
     return ReactDOM.createPortal(
         <Backdrop>
@@ -32,6 +36,7 @@ const Cart = (props) => {
                             onSubtract={liftingSubtractHandler}
                             onAdd={liftingAddHandler}
                             onCalc={props.onCalc}
+                            onDelete={liftingDeleteHandler}
                         />
                     );
                 })};

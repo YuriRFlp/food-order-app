@@ -10,6 +10,7 @@
     cursor: pointer;
     color: #fff;
     padding: .25rem;
+    width: auto;
 }
 
 .cartButton:focus{

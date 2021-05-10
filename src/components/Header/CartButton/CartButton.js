@@ -1,5 +1,5 @@
 import { Fragment, useState, useContext } from 'react';
-import FoodListContext from '../../../store/foodList-context';
+import FoodListContext from '../../../store/cart-context';
 import styles from './CartButton.module.css';
 import Cart from '../CartButton/Cart/Cart';
 import Backdrop from '../../UI/Backdrop/Backdrop';
@@ -10,19 +10,21 @@ const CartButton = (props) => {
     const [totalPrice, setTotalPrice] = useState(Number(0).toFixed(2));
 
     const calcPrice = () => {
-        if(ctx.length > 0){
-            setTotalPrice( () => {
-                let prices = ctx.map( food => {
-                    return (food.price * food.amount);
-                });
-
-                let total = prices.reduce( (p1, p2) => {
+        setTotalPrice( () => {
+            let prices = ctx.map( food => {
+                return (food.price * food.amount);
+            });
+            let total;
+            if(ctx.length > 0){
+                total = prices.reduce( (p1, p2) => {
                     return p1 + p2;
                 });
-                
-                return total.toFixed(2);
-            });
-        };
+            } else {
+                total = 0;
+            }
+            
+            return total.toFixed(2);
+        });
     };
 
     const cartVisibleHandler = () => {
@@ -42,6 +44,10 @@ const CartButton = (props) => {
         props.onAdd(foodTitle);
     };
 
+    const liftingDeleteHandler = foodTitle => {
+        props.onDelete(foodTitle);
+    }
+
     return(
         <Fragment>
             {cartAvailable && 
@@ -51,6 +57,7 @@ const CartButton = (props) => {
                     onAdd={liftingAddHandler}
                     onCalc={calcPrice}
                     totalPrice={totalPrice}
+                    onDelete={liftingDeleteHandler}
                 />
             }
             {cartAvailable && <Backdrop/>}

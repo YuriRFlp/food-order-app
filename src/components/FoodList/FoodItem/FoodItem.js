@@ -28,7 +28,7 @@ const FoodItem = (props) => {
     };
 
     return(
-        <div className={styles.flexRowContainer}>
+        <ul className={styles.flexRowContainer}>
             <div className={styles.flexColumnContainer}>
                 <h3 className={styles.title}>{props.product}</h3>
                 <p className={styles.text}><em>{props.detail}</em></p>
@@ -49,7 +49,7 @@ const FoodItem = (props) => {
                 </div>
                 <ButtonRed>+ Add</ButtonRed>
             </form>
-        </div>
+        </ul>
     );
 }
 

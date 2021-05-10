@@ -43,7 +43,7 @@
     padding: .35rem 0;
 }
 
-@media (min-width: 510px){
+@media (min-width: 660px){
     .flexRowContainer{
         flex-flow: row;
         justify-content: space-between;
