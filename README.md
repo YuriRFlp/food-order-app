@@ -10,7 +10,7 @@ Esse projeto objetiva fornecer um sistema SPA (*Single Page Application*) eficie
 2. Fornecer um carrinho de compras para armazenar as refeições selecionadas pelos usuários; 
 3. Armazenar os pedidos realizados pelos usuários no banco de dados do `Firebase`.
 
-## 🎨Layout
+## 🎨 Layout
 ### Tela principal
 <img src="./src/imagens/home.gif" alt="Gif animado da tela inicial">
 
