@@ -5,29 +5,6 @@ import Header from './components/Header/Header';
 import FoodListContext from './store/cart-context';
 
 const App = () => {
-  const foodList = [
-    {
-      title: "Sushi",
-      description: "Finest fish and veggies",
-      price: 22.99
-    },
-    {
-      title: "Schnitzel",
-      description: "A german, specialty",
-      price: 16.50
-    },
-    {
-      title: "Barbecue Burger",
-      description: "American, raw, meaty",
-      price: 12.99
-    },
-    {
-      title: "Green Bowl",
-      description: "Healthy and green",
-      price: 18.99
-    }
-  ];
-
   const [selectedFood, setSelectedFood] = useState([]);
 
   const setCartContext = foodData => {
@@ -45,53 +22,12 @@ const App = () => {
     });
   };
 
-  const subAmountHandler = foodTitle => {
-    setSelectedFood( prevSelectedFood => {
-      prevSelectedFood.forEach( (food, i) => {
-        if(food.title === foodTitle && food.amount > 0){
-          food.amount--;
-        }
-      });
-      return prevSelectedFood;
-    });
-  };
-
-  const addAmountHandler = foodTitle => {
-    setSelectedFood( prevSelectedFood => {
-      prevSelectedFood.forEach( food => {
-        if(food.title === foodTitle){
-          food.amount++;
-        };
-      });
-      
-      return prevSelectedFood;
-    });
-  };
-
-  const deleteCartItemHandler = foodTitle => {
-    setSelectedFood( prevSelectedFood => {
-      prevSelectedFood.forEach( (food, i) => {
-        if(food.title === foodTitle){
-          prevSelectedFood.splice(i, 1);
-        };
-      });
-
-      return [...prevSelectedFood];
-    });
-  };
 
   return (
     <FoodListContext.Provider value={selectedFood}>
-      <Header 
-        onSubtract={subAmountHandler}  
-        onAdd={addAmountHandler}
-        onDelete={deleteCartItemHandler}
-      />
+      <Header changeCtxValue={setSelectedFood}/>
       <Description/>
-      <FoodList 
-        items={foodList} 
-        onLift={setCartContext}
-      />
+      <FoodList onLift={setCartContext}/>
     </FoodListContext.Provider>
   );
 }

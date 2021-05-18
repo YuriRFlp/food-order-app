@@ -6,7 +6,6 @@
     cursor: pointer;
     padding: .5rem 1rem;
     font-weight: 600;
-    width: 100%;
 }
 
 .buttonWhite{
@@ -17,7 +16,6 @@
     cursor: pointer;
     padding: .5rem 1rem;
     font-weight: 600;
-    width: 100%;
     margin: 0 .5rem;
 }
 
@@ -43,5 +41,16 @@
     .buttonWhite{
         width: auto;
         margin: 0 1rem;
+    }
+}
+
+@media (min-width: 850px){
+    .buttonRed{
+        width: 9em;
+        align-self: flex-end;
+    }
+
+    .buttonWhite{
+        width: 6em;
     }
 }

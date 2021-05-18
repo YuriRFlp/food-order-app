@@ -36,28 +36,14 @@ const CartButton = (props) => {
         }
     }
 
-    const liftingSubtractHandler = foodTitle => {
-        props.onSubtract(foodTitle);
-    };
-
-    const liftingAddHandler = foodTitle => {
-        props.onAdd(foodTitle);
-    };
-
-    const liftingDeleteHandler = foodTitle => {
-        props.onDelete(foodTitle);
-    }
-
     return(
         <Fragment>
             {cartAvailable && 
                 <Cart 
                     onClick={cartVisibleHandler} 
-                    onSubtract={liftingSubtractHandler}
-                    onAdd={liftingAddHandler}
                     onCalc={calcPrice}
                     totalPrice={totalPrice}
-                    onDelete={liftingDeleteHandler}
+                    changeCtxValue={props.changeCtxValue}
                 />
             }
             {cartAvailable && <Backdrop/>}

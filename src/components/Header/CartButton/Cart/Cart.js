@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import CartContext from '../../../../store/cart-context';
 import CartItems from './CartItems/CartItems';
 import Container from '../../../UI/Container/Container';
@@ -7,48 +7,101 @@ import ButtonWhite from '../../../UI/Button/ButtonWhite';
 import ButtonRed from '../../../UI/Button/ButtonRed';
 import styles from './Cart.module.css';
 import Backdrop from '../../../UI/Backdrop/Backdrop';
+import AlertOrder from './AlertOrder/AlertOrder';
 
 const Cart = (props) => {
     const ctx = useContext(CartContext);
+    const [wasSent, setWasSent] = useState(false);
+    const [error, setError] = useState(null);
 
-    const liftingSubtractHandler = foodTitle => {
-        props.onSubtract(foodTitle);
+    const subAmountHandler = foodTitle => {
+        props.changeCtxValue( prevSelectedFood => {
+            prevSelectedFood.forEach( (food) => {
+                if(food.title === foodTitle && food.amount > 0){
+                    food.amount--;
+                }
+            });
+            
+            return prevSelectedFood;
+        });
+    };
+    
+    const addAmountHandler = foodTitle => {
+        props.changeCtxValue( prevSelectedFood => {
+            prevSelectedFood.forEach( food => {
+                if(food.title === foodTitle){
+                    food.amount++;
+                };
+            });
+          
+            return prevSelectedFood;
+        });
+    };
+    
+    const deleteCartItemHandler = foodTitle => {
+        props.changeCtxValue( prevSelectedFood => {
+            prevSelectedFood.forEach( (food, i) => {
+                if(food.title === foodTitle){
+                    prevSelectedFood.splice(i, 1);
+                };
+            });
+    
+            return [...prevSelectedFood];
+        });
     };
 
-    const liftingAddHandler = foodTitle => {
-        props.onAdd(foodTitle);
-    };
+    const fetchCartDataHandler = async () => {
+        const order = {
+            items: [...ctx],
+            total: props.totalPrice
+        }
 
-    const liftingDeleteHandler = foodTitle => {
-        props.onDelete(foodTitle);
-    }
+        try{
+            await fetch('https://food-order-655b4-default-rtdb.firebaseio.com/orders.json', {
+                method: 'POST',
+                body: JSON.stringify(order),
+            });
+
+        }catch(e) {
+            setError(true);
+        }
+
+        props.changeCtxValue([]);
+        
+        setWasSent(true);
+    };
 
     return ReactDOM.createPortal(
         <Backdrop>
-            <Container>
-                {ctx.map( food => {
-                    return(    
-                        <CartItems
-                            key={food.title}
-                            title={food.title}
-                            price={food.price}
-                            amount={food.amount}
-                            onSubtract={liftingSubtractHandler}
-                            onAdd={liftingAddHandler}
-                            onCalc={props.onCalc}
-                            onDelete={liftingDeleteHandler}
-                        />
-                    );
-                })};
-                <div className={styles['amount-container']}>
-                    <h3>Total Price</h3>
-                    <p className={styles['total-amount']}>${props.totalPrice}</p>
-                </div>
-                <div className={styles['button-container']}>
-                    <ButtonWhite onClick={props.onClick}>Close</ButtonWhite>
-                    <ButtonRed>Order</ButtonRed>
-                </div>
-            </Container>
+            {wasSent && !error && <AlertOrder onClick={props.onClick} message='Your order was sent'/>}
+            {error && <AlertOrder onClick={props.onClick} message='Your order cannot be sent'/>}
+            {!wasSent && 
+                <Container>
+                    {ctx.map( food => { 
+                        return(    
+                            <CartItems
+                                key={food.title}
+                                title={food.title}
+                                price={food.price}
+                                amount={food.amount}
+                                onSubtract={subAmountHandler}
+                                onAdd={addAmountHandler}
+                                onDelete={deleteCartItemHandler}
+                                onCalc={props.onCalc}
+                            />
+                        )
+                    })}
+
+                    <div className={styles['amount-container']}>
+                        <h3>Total Price</h3>
+                        <p className={styles['total-amount']}>${props.totalPrice}</p>
+                    </div>
+                    <div className={styles['button-container']}>
+                        <ButtonWhite onClick={props.onClick}>Close</ButtonWhite>
+                        <ButtonRed onClick={fetchCartDataHandler}>Order</ButtonRed>
+                    </div>
+                </Container>
+            }
         </Backdrop>,
         document.getElementById('cart-root')
     )

@@ -1,0 +1,19 @@
+.text{
+    color: rgb(97, 1, 1);
+    font-weight: 600;
+    align-self: flex-start;
+    margin: 2em 0 2em 4em;
+}
+
+.position{
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}
+
+@media (max-width: 850px){
+    .text{
+        align-self: center;
+        margin-left: 0;
+    }
+}
